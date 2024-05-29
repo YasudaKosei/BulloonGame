@@ -7,6 +7,7 @@ public class ObjectController : MonoBehaviour
     private Rigidbody rigidBody;
 
     public bool ObjectMove;
+    public CapsuleCollider MyCollider;
 
     void Start()
     {
@@ -92,6 +93,16 @@ public class ObjectController : MonoBehaviour
         if(collision.gameObject.tag == "SpikeBall")
         {
             ObjectMove = false;
+            MyCollider.isTrigger = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "HealPoint")
+        {
+            ObjectMove = true;
+            MyCollider.isTrigger = false;
         }
     }
 }
