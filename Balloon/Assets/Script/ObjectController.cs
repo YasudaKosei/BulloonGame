@@ -6,23 +6,31 @@ public class ObjectController : MonoBehaviour
     public float rotateSpeed = 0f; // 回転速度
     private Rigidbody rigidBody;
 
+    public bool ObjectMove;
+
     void Start()
     {
+        ObjectMove = true;
+
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.useGravity = false; // オブジェクトに重力を無効にする
 
         EnableGravity(true);
     }
 
     void Update()
     {
+        if (!ObjectMove) return;
+
         // オブジェクトを浮かせる
         FloatObject();
 
+#if UNITY_EDITOR
         // 左右に回転(pc)
         RotateObjectPC();
+#endif
     }
 
+    // オブジェクトを浮かせる
     void FloatObject()
     {
         // オブジェクトに上向きの力を加える
@@ -30,6 +38,7 @@ public class ObjectController : MonoBehaviour
         rigidBody.AddForce(floatForce, ForceMode.Force);
     }
 
+    // 左右に回転(pc)
     void RotateObjectPC()
     {
         if (Input.GetKey(KeyCode.Z))
@@ -76,5 +85,13 @@ public class ObjectController : MonoBehaviour
     public void EnableGravity(bool enable)
     {
         rigidBody.useGravity = enable;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "SpikeBall")
+        {
+            ObjectMove = false;
+        }
     }
 }
