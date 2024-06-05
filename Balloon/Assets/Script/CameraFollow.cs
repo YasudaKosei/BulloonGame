@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    //カメラの追従
+
     public Transform target; // 追従するオブジェクト
     public float offsetY = 2f; // カメラのY座標のオフセット
 

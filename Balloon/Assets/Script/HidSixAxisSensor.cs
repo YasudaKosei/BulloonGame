@@ -65,25 +65,17 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
 
                 state.GetQuaternion(ref npadQuaternion);
                 quaternion.Set(npadQuaternion.x, npadQuaternion.z, npadQuaternion.y, -npadQuaternion.w);
-                controllers[i].transform.rotation = quaternion;
+                //controllers[i].transform.rotation = quaternion;
 
                 // オブジェクトの回転を360度形式で取得
-                Vector3 rotation360 = controllers[i].transform.eulerAngles;
+                //Vector3 rotation360 = controllers[i].transform.eulerAngles;
+                Vector3 rotation360 = quaternion.eulerAngles;
                 rotation360 = new Vector3(
                     rotation360.x >= 0 ? rotation360.x : 360 + rotation360.x,
                     rotation360.y >= 0 ? rotation360.y : 360 + rotation360.y,
                     rotation360.z >= 0 ? rotation360.z : 360 + rotation360.z
                 );
 
-                // 360度形式の回転をUIに表示
-                //stringBuilder.AppendFormat(
-                //    "{0}[{1}]:\nAngle({2:F1}, {3:F1}, {4:F1})\nVelocity({5}, {6}, {7})\nAcceleration({8}, {9}, {10})\nRotation360({11:F1}, {12:F1}, {13:F1})\n",
-                //    npadStyle.ToString(), i,
-                //    state.angle.x, state.angle.y, state.angle.z,
-                //    state.angularVelocity.x, state.angularVelocity.y, state.angularVelocity.z,
-                //    state.acceleration.x, state.acceleration.y, state.acceleration.z,
-                //    rotation360.x, rotation360.y, rotation360.z
-                //);
                 stringBuilder.AppendFormat(
                     "{0}[{1}]:\rotation.z {2:F1}\n",
                     npadStyle.ToString(), i,rotation360.z
@@ -128,18 +120,6 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
         if (no1Style != NpadStyle.None)
         {
             Npad.GetState(ref no1State, NpadId.No1, no1Style);
-            //if (no1State.buttons != NpadButton.None)
-            //{
-            //    if ((npadId != NpadId.No1) || (npadStyle != no1Style))
-            //    {
-            //        this.GetSixAxisSensor(NpadId.No1, no1Style);
-            //    }
-            //    npadId = NpadId.No1;
-            //    npadStyle = no1Style;
-            //    npadState = no1State;
-            //    return true;
-            //}
-
             if ((npadId != NpadId.No1) || (npadStyle != no1Style))
             {
                 this.GetSixAxisSensor(NpadId.No1, no1Style);

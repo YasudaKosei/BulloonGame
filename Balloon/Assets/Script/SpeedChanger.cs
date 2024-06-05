@@ -12,7 +12,7 @@ public class SpeedChanger : MonoBehaviour
     {
         value = 1 - value;
 
-        if (value <= 0.0 || !objectController.ObjectMove)
+        if (value <= 0.0 || !ObjectController.ObjectMove)
         {
             objectController.SetFloatSpeed(0);
             objectController.EnableGravity(true);

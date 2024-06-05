@@ -21,7 +21,7 @@ public class FireManager : MonoBehaviour
 
     public void SetFireScale(float value)
     {
-        if (value <= 0.0 || !objectController.ObjectMove)
+        if (value <= 0.0 || !ObjectController.ObjectMove)
         {
             fireObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
             audioSource.Stop();

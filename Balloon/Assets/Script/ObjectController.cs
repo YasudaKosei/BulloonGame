@@ -4,17 +4,15 @@ public class ObjectController : MonoBehaviour
 {
     private float floatSpeed = 0f; // 浮く速度
     public float rotateSpeed = 0f; // 回転速度
-    private Rigidbody rigidBody;
+    public static int hp = 3;
+    public static bool ObjectMove;
 
-    public bool ObjectMove;
-    public CapsuleCollider MyCollider;
+    public CapsuleCollider ObjectCollider;
+    public Rigidbody RigidBody;
 
     void Start()
     {
         ObjectMove = true;
-
-        rigidBody = GetComponent<Rigidbody>();
-
         EnableGravity(true);
     }
 
@@ -36,7 +34,7 @@ public class ObjectController : MonoBehaviour
     {
         // オブジェクトに上向きの力を加える
         Vector3 floatForce = transform.up * (floatSpeed * Time.deltaTime);
-        rigidBody.AddForce(floatForce, ForceMode.Force);
+        RigidBody.AddForce(floatForce, ForceMode.Force);
     }
 
     // 左右に回転(pc)
@@ -57,24 +55,10 @@ public class ObjectController : MonoBehaviour
                 transform.Rotate(new Vector3(0, 0, Time.deltaTime * -rotateSpeed));
             }
         }
-
     }
 
     public void RotateObjectSwitch(float val)
     {
-        //if(val > 280)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 280 * -1);
-        //}
-        //else if (val < 90)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 90 * -1);
-        //}
-        //else
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, (val) * -1);
-        //}
-
         transform.rotation = Quaternion.Euler(0, 0, (val) * -1);
     }
 
@@ -85,24 +69,41 @@ public class ObjectController : MonoBehaviour
 
     public void EnableGravity(bool enable)
     {
-        rigidBody.useGravity = enable;
+        RigidBody.useGravity = enable;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "SpikeBall")
-        {
-            ObjectMove = false;
-            MyCollider.isTrigger = true;
-        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "HealPoint")
         {
-            ObjectMove = true;
-            MyCollider.isTrigger = false;
+            Debug.Log("HealPointに当たりました");
+            hp = 3;
+            DownBalloonOff();
         }
+    }
+
+    public int HP(int val)
+    {
+        hp = hp - val;
+        if (hp == 0) DownBalloonOn();
+
+        return hp;
+    }
+
+    public void DownBalloonOn()
+    {
+        ObjectMove = false;
+        ObjectCollider.isTrigger = true;
+    }
+
+    public void DownBalloonOff()
+    {
+        ObjectMove = true;
+        ObjectCollider.isTrigger = false;
     }
 }
