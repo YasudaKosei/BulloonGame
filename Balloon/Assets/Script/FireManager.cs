@@ -7,49 +7,46 @@ public class FireManager : MonoBehaviour
 {
     //Balloonのスピードによって変わる火の大きさの管理
 
-    public ObjectController objectController;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
     public GameObject fireObject;
+
+    public float[] fireSize;
 
     private int nowAudioClipNum;
 
     private void Start()
     {
-        SetFireScale(0);
+        SetFireScale();
     }
 
-    public void SetFireScale(float value)
+    public void SetFireScale()
     {
-        if (value <= 0.0 || !ObjectController.ObjectMove)
+        if (BalloonManager.balloonFireLevel == 0 || BalloonManager.isFalling)
         {
-            fireObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            fireObject.transform.localScale = new Vector3(fireSize[0], fireSize[0], fireSize[0]);
             audioSource.Stop();
             nowAudioClipNum = 100;
         }
-        else if (value <= 0.1)
+        else if (BalloonManager.balloonFireLevel == 1)
         {
-            fireObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            fireObject.transform.localScale = new Vector3(fireSize[1], fireSize[1], fireSize[1]);
             PlayAudioClip(0);
-            nowAudioClipNum = 0;
         }
-        else if (value <= 0.2)
+        else if (BalloonManager.balloonFireLevel == 2)
         {
-            fireObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            fireObject.transform.localScale = new Vector3(fireSize[2], fireSize[2], fireSize[2]);
             PlayAudioClip(1); 
-            nowAudioClipNum = 1;
         }
-        else if (value <= 0.3)
+        else if (BalloonManager.balloonFireLevel == 3)
         {
-            fireObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            fireObject.transform.localScale = new Vector3(fireSize[3], fireSize[3], fireSize[3]);
             PlayAudioClip(2); 
-            nowAudioClipNum = 2;
         }
         else
         {
-            fireObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            fireObject.transform.localScale = new Vector3(fireSize[4], fireSize[4], fireSize[4]);
             PlayAudioClip(2);
-            nowAudioClipNum = 2;
         }
     }
 
@@ -61,5 +58,7 @@ public class FireManager : MonoBehaviour
             audioSource.Play();
             nowAudioClipNum = index;
         }
+
+        nowAudioClipNum = index;
     }
 }

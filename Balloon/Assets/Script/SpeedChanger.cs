@@ -8,40 +8,42 @@ public class SpeedChanger : MonoBehaviour
     public ObjectController objectController;
     public FireManager fireManager;
 
+    public float[] speedChangeVal;
+
     public void ChangeFloatSpeed(float value)
     {
         value = 1 - value;
 
-        if (value <= 0.0 || !ObjectController.ObjectMove)
+        if (value <= speedChangeVal[0] || BalloonManager.isFalling)
         {
-            objectController.SetFloatSpeed(0);
-            objectController.EnableGravity(true);
-            fireManager.SetFireScale(value);
+            BalloonManager.balloonFireLevel = 0;
+            fireManager.SetFireScale();
+            objectController.SetFloatSpeed();
         }
-        else if (value <= 0.1)
+        else if (value <= speedChangeVal[1])
         {
-            objectController.SetFloatSpeed(400);
-            objectController.EnableGravity(false);
-            fireManager.SetFireScale(value);
+            BalloonManager.balloonFireLevel = 1;
+            fireManager.SetFireScale();
+            objectController.SetFloatSpeed();
         }
 
-        else if (value <= 0.2)
+        else if (value <= speedChangeVal[2])
         {
-            objectController.SetFloatSpeed(600f);
-            objectController.EnableGravity(false);
-            fireManager.SetFireScale(value);
+            BalloonManager.balloonFireLevel = 2;
+            fireManager.SetFireScale();
+            objectController.SetFloatSpeed();
         }
-        else if (value <= 0.3)
+        else if (value <= speedChangeVal[3])
         {
-            objectController.SetFloatSpeed(800f);
-            objectController.EnableGravity(false);
-            fireManager.SetFireScale(value);
+            BalloonManager.balloonFireLevel = 3;
+            fireManager.SetFireScale();
+            objectController.SetFloatSpeed();
         }
         else
         {
-            objectController.SetFloatSpeed(2500f);
-            objectController.EnableGravity(false);
-            fireManager.SetFireScale(value);
+            BalloonManager.balloonFireLevel = 4;
+            fireManager.SetFireScale();
+            objectController.SetFloatSpeed();
         }
     }
 }

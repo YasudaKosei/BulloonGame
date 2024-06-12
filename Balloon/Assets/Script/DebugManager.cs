@@ -9,6 +9,6 @@ public class DebugManager : MonoBehaviour
    
     private void Update()
     {
-        hpText.text = ObjectController.hp.ToString();
+        hpText.text = BalloonManager.hp.ToString();
     }
 }

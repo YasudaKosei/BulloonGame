@@ -8,7 +8,7 @@ public class EnamyManger : MonoBehaviour
 
     [SerializeField]
     [Tooltip("跳ね返す単位ベクトルにかける倍数")]
-    private float bounceVectorMultiple = 2f;
+    private float bounceVectorMultiple = 3f;
 
     [SerializeField]
     [Tooltip("ダメージ")]

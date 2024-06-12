@@ -4,9 +4,6 @@ using nn.hid;
 
 public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したクラス
 {
-    // 2つのコントローラーオブジェクトを格納する配列
-    public GameObject[] controllers = new GameObject[2];
-
     public ObjectController objectController;
 
     // UIテキストを表示するためのコンポーネント
@@ -65,10 +62,8 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
 
                 state.GetQuaternion(ref npadQuaternion);
                 quaternion.Set(npadQuaternion.x, npadQuaternion.z, npadQuaternion.y, -npadQuaternion.w);
-                //controllers[i].transform.rotation = quaternion;
 
                 // オブジェクトの回転を360度形式で取得
-                //Vector3 rotation360 = controllers[i].transform.eulerAngles;
                 Vector3 rotation360 = quaternion.eulerAngles;
                 rotation360 = new Vector3(
                     rotation360.x >= 0 ? rotation360.x : 360 + rotation360.x,
@@ -82,11 +77,6 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
                 );
 
                 objectController.RotateObjectSwitch(rotation360.z);
-
-                if (handleCount == 1)
-                {
-                    controllers[i + 1].transform.rotation = quaternion;
-                }
             }
         }
 
