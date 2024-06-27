@@ -14,6 +14,8 @@ public class ObjectController : MonoBehaviour
 
     public float[] fireSizeSpeed;
 
+    public GameObject[] hpSmoke;
+
     void Update()
     {
         if (BalloonManager.isFalling) return;
@@ -72,16 +74,40 @@ public class ObjectController : MonoBehaviour
             if (BalloonManager.hp == 3) return;
             Debug.Log("HealPointに当たりました");
             BalloonManager.hp = 3;
+            HPSmoke();
             Instantiate(buff, buffPos);
-            DownBalloonOff();
         }
     }
 
     public int HP(int val)
     {
         BalloonManager.hp = BalloonManager.hp - val;
-        if (BalloonManager.hp == 0) DownBalloonOn();
+        HPSmoke();
         return BalloonManager.hp;
+    }
+
+    public void HPSmoke()
+    {
+        if (BalloonManager.hp == 3)
+        {
+            DownBalloonOff();
+            for(int i = 0; i < hpSmoke.Length; i++)
+            {
+                hpSmoke[i].SetActive(false);
+            }
+        }
+
+        if (BalloonManager.hp < 3)
+        {
+            hpSmoke[0].SetActive(true);
+
+            if (BalloonManager.hp < 2)
+            {
+                hpSmoke[1].SetActive(true);
+            }
+        }
+
+        if (BalloonManager.hp == 0) DownBalloonOn();
     }
 
     public void DownBalloonOn()

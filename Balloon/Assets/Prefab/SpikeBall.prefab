@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8406840927864039639}
   - component: {fileID: 9066890607496454515}
   - component: {fileID: 4173671125355435964}
+  - component: {fileID: 7625979754359986082}
   m_Layer: 0
   m_Name: SpikeBall
   m_TagString: SpikeBall
@@ -113,9 +114,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddc55d177d8881418ce849fe21e740d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceSpeed: 10
+  bounceSpeed: 15
   bounceVectorMultiple: 2
   damagee: 1
+  particle: {fileID: 7629771703593893271, guid: cf7581e1e997bf24d96b9c8fbdd2a272, type: 3}
+--- !u!114 &7625979754359986082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733377297168083308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce6ccee68f28264795e21d3710a96c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6454507189856656175
 GameObject:
   m_ObjectHideFlags: 0

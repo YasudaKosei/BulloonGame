@@ -14,17 +14,17 @@ public class EnamyManger : MonoBehaviour
     [Tooltip("ダメージ")]
     private int damagee = 1;
 
-    ObjectController objectController;
+    private ObjectController objectController;
 
-    /// <summary>
-    /// 衝突した時
-    /// </summary>
-    /// <param name="collision"></param>
+    public GameObject particle;
+
     private void OnCollisionEnter(Collision collision)
     {
         // 当たった相手に"Player"タグが付いている場合
         if (collision.gameObject.tag == "Player")
         {
+            BalloonManager.isFalling = true;
+
             objectController = collision.gameObject.GetComponent<ObjectController>();
 
             int hp = objectController.HP(damagee);
@@ -39,6 +39,13 @@ public class EnamyManger : MonoBehaviour
             velocity += new Vector3(-normal.x * bounceVectorMultiple, 0f, -normal.z * bounceVectorMultiple);
             // 取得した法線ベクトルに跳ね返す速さをかけて、跳ね返す
             collision.rigidbody.AddForce(velocity * bounceSpeed, ForceMode.Impulse);
+
+            // 接触した場所にパーティクルを生成する
+            GameObject spawnParticle  = Instantiate(particle, collision.contacts[0].point, Quaternion.identity);
+
+            Destroy(spawnParticle, 1.0f);
+
+            BalloonManager.isFalling = false;
         }
     }
 }
