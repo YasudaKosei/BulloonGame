@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectController : MonoBehaviour
 {
@@ -18,15 +19,14 @@ public class ObjectController : MonoBehaviour
 
     void Update()
     {
-        if (BalloonManager.isFalling) return;
+        if (BalloonManager.isFalling || BalloonManager.wait) return;
 
         // オブジェクトを浮かせる
         FloatObject();
 
-#if UNITY_EDITOR
-        // 左右に回転(pc)
         RotateObjectPC();
-#endif
+        RotateObjectSwitch();
+
     }
 
     // オブジェクトを浮かせる
@@ -40,6 +40,8 @@ public class ObjectController : MonoBehaviour
     // 左右に回転(pc)
     void RotateObjectPC()
     {
+        if (BalloonManager.controllerNum != 0) return;
+
         if (Input.GetKey(KeyCode.Z))
         {
             if (transform.rotation.z < 0.56)
@@ -51,6 +53,27 @@ public class ObjectController : MonoBehaviour
         {
             Debug.Log(transform.rotation.z);
             if(transform.rotation.z > -0.56)
+            {
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * -BalloonManager.rotateSpeed));
+            }
+        }
+    }
+
+    void RotateObjectSwitch()
+    {
+        if (BalloonManager.controllerNum != 0 || Gamepad.current == null) return;
+
+        if (Gamepad.current.leftStick.ReadValue().x < -0.1f)
+        {
+            if (transform.rotation.z < 0.56)
+            {
+                transform.Rotate(new Vector3(0, 0, Time.deltaTime * BalloonManager.rotateSpeed));
+            }
+        }
+        else if (Gamepad.current.leftStick.ReadValue().x > 0.1f)
+        {
+            Debug.Log(transform.rotation.z);
+            if (transform.rotation.z > -0.56)
             {
                 transform.Rotate(new Vector3(0, 0, Time.deltaTime * -BalloonManager.rotateSpeed));
             }

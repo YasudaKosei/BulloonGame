@@ -41,6 +41,8 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
 
     void Update()
     {
+        if (BalloonManager.controllerNum != 1) return;
+
         stringBuilder.Length = 0;
 
         NpadId npadId = NpadId.Handheld;

@@ -22,7 +22,7 @@ public class FireManager : MonoBehaviour
 
     public void SetFireScale()
     {
-        if (BalloonManager.balloonFireLevel == 0 || BalloonManager.isFalling)
+        if (BalloonManager.balloonFireLevel == 0 || BalloonManager.isFalling || BalloonManager.wait)
         {
             fireObject.transform.localScale = new Vector3(fireSize[0], fireSize[0], fireSize[0]);
             audioSource.Stop();
@@ -33,20 +33,10 @@ public class FireManager : MonoBehaviour
             fireObject.transform.localScale = new Vector3(fireSize[1], fireSize[1], fireSize[1]);
             PlayAudioClip(0);
         }
-        else if (BalloonManager.balloonFireLevel == 2)
+        else
         {
             fireObject.transform.localScale = new Vector3(fireSize[2], fireSize[2], fireSize[2]);
             PlayAudioClip(1); 
-        }
-        else if (BalloonManager.balloonFireLevel == 3)
-        {
-            fireObject.transform.localScale = new Vector3(fireSize[3], fireSize[3], fireSize[3]);
-            PlayAudioClip(2); 
-        }
-        else
-        {
-            fireObject.transform.localScale = new Vector3(fireSize[4], fireSize[4], fireSize[4]);
-            PlayAudioClip(2);
         }
     }
 

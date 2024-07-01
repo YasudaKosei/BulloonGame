@@ -36,6 +36,8 @@ public class IrSensor : MonoBehaviour
 
     private void Update()
     {
+        if (BalloonManager.controllerNum != 1) return;
+
         stringBuilder.Length = 0;
         stringBuilder.Append("IR sensor status: ");
 
