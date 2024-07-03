@@ -29,6 +29,11 @@ public class EnamyManger : MonoBehaviour
 
             int hp = objectController.HP(damagee);
 
+            // 接触した場所にパーティクルを生成する
+            GameObject spawnParticle = Instantiate(particle, collision.contacts[0].point, Quaternion.identity);
+
+            Destroy(spawnParticle, 1.0f);
+
             if (hp < 1) return;
 
             // 衝突した面の、接触した点における法線ベクトルを取得
@@ -39,11 +44,6 @@ public class EnamyManger : MonoBehaviour
             velocity += new Vector3(-normal.x * bounceVectorMultiple, 0f, -normal.z * bounceVectorMultiple);
             // 取得した法線ベクトルに跳ね返す速さをかけて、跳ね返す
             collision.rigidbody.AddForce(velocity * bounceSpeed, ForceMode.Impulse);
-
-            // 接触した場所にパーティクルを生成する
-            GameObject spawnParticle  = Instantiate(particle, collision.contacts[0].point, Quaternion.identity);
-
-            Destroy(spawnParticle, 1.0f);
 
             BalloonManager.isFalling = false;
         }

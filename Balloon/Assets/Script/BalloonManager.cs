@@ -14,7 +14,7 @@ public class BalloonManager : MonoBehaviour
 
     public static float floatSpeed = 0f; // •‚‚­‘¬“x
 
-    public static float rotateSpeed = 150f; // ‰ñ“]‘¬“x
+    public static float rotateSpeed = 200f; // ‰ñ“]‘¬“x
 
     public static int balloonFireLevel = 0;
 }

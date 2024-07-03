@@ -17,6 +17,8 @@ public class ObjectController : MonoBehaviour
 
     public GameObject[] hpSmoke;
 
+    public CameraShake cameraShake;
+
     void Update()
     {
         if (BalloonManager.isFalling || BalloonManager.wait) return;
@@ -90,7 +92,7 @@ public class ObjectController : MonoBehaviour
         BalloonManager.floatSpeed = fireSizeSpeed[BalloonManager.balloonFireLevel];
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "HealPoint")
         {
@@ -106,6 +108,7 @@ public class ObjectController : MonoBehaviour
     {
         BalloonManager.hp = BalloonManager.hp - val;
         HPSmoke();
+        cameraShake.Shake();
         return BalloonManager.hp;
     }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9066890607496454515}
   - component: {fileID: 4173671125355435964}
   - component: {fileID: 7625979754359986082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpikeBall
   m_TagString: SpikeBall
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 2039719903283793459}
   - component: {fileID: 3887836869180276666}
   - component: {fileID: 4962180967162453042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpikeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

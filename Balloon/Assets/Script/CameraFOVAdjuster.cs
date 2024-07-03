@@ -19,6 +19,8 @@ public class CameraFOVAdjuster : MonoBehaviour
 
     void Update()
     {
+        if (BalloonManager.isFalling || BalloonManager.wait) return;
+
         AdjustFOV();
     }
 
