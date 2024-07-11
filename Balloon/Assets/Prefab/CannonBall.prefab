@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec562fbb9e960874890481c6c2ef495d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 8
   homingTime: 2
   damagee: 1
   particle: {fileID: 7629771703593893271, guid: cf7581e1e997bf24d96b9c8fbdd2a272, type: 3}
