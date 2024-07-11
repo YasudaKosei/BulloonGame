@@ -18,6 +18,8 @@ public class SliderControl : MonoBehaviour
     private Color yellowColor = Color.yellow;
     private Color redColor = Color.red;
 
+    private bool onPush = false;
+
     void Start()
     {
         // 初期のFillAmountを保存
@@ -41,25 +43,29 @@ public class SliderControl : MonoBehaviour
             objectController.HP(3);
         }
 
-        if (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame)
+        if (BalloonManager.balloonFireLevel == 2 && !onPush)
         {
-            currentFillAmount -= decreaseAmountOnPress; // 指定した値を減らす
+            onPush = true;
+            // FillAmountの値を徐々に減らす
+            currentFillAmount -= decreaseAmountOnPress;
         }
 
-        if (Gamepad.current != null && Gamepad.current.buttonNorth.isPressed)
+        if (BalloonManager.balloonFireLevel == 2 && onPush)
         {
             // FillAmountの値を徐々に減らす
             currentFillAmount -= decreaseSpeed * Time.deltaTime;
         }
-        else if (Gamepad.current != null && Gamepad.current.buttonEast.isPressed)
+        else if (BalloonManager.balloonFireLevel == 1)
         {
             // FillAmountの値を徐々に減らす
-            currentFillAmount -= (increaseSpeed / 2) * Time.deltaTime;
+            currentFillAmount -= (decreaseSpeed / 2) * Time.deltaTime;
+            onPush = false;
         }
         else
         {
             // FillAmountの値を徐々に回復する
             currentFillAmount += increaseSpeed * Time.deltaTime;
+            onPush = false;
         }
 
         // FillAmountの値を0から1の範囲内に制限する

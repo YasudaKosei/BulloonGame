@@ -7,19 +7,21 @@ using UnityEngine.UI;
 public class WaitManager : MonoBehaviour
 {
     public Text waitText;
+    public CameraFollow cameraFollow;
+    public SayTextManager sayTextManager;
 
     void Update()
     {
-        if (Gamepad.current != null)
+        if (Gamepad.current != null && BalloonManager.wait)
         {
             //ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©
-            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
             {
                 OffWait();
             }
         }
 
-        if (Keyboard.current != null)
+        if (Gamepad.current != null && BalloonManager.wait)
         {
             if (Keyboard.current.enterKey.wasPressedThisFrame)
             {
@@ -32,6 +34,10 @@ public class WaitManager : MonoBehaviour
     void OffWait()
     {
         BalloonManager.wait = false;
+        sayTextManager.OnSayText(0, 1f);
+        sayTextManager.OnSayText(1, 6f);
+        sayTextManager.OnSayText(2, 11.7f);
+        cameraFollow.ZoomOut();
         waitText.text = "";
     }
 }

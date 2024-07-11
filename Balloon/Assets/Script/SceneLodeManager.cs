@@ -9,14 +9,14 @@ public class SceneLodeManager : MonoBehaviour
     [SerializeField] private GameObject loadingUI;
     [SerializeField] private Slider slider;
 
-    public void LoadNextScene()
+    public void LoadNextScene(string scene)
     {
         loadingUI.SetActive(true);
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadScene(scene));
     }
-    IEnumerator LoadScene()
+    IEnumerator LoadScene(string scene)
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync("GameScene");
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
         while (!async.isDone)
         {
             slider.value = async.progress;

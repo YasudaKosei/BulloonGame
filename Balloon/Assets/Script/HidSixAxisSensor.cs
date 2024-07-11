@@ -78,7 +78,7 @@ public class HidSixAxisSensor : MonoBehaviour // MonoBehaviourを継承したク
                     npadStyle.ToString(), i,rotation360.z
                 );
 
-                objectController.RotateObjectSwitch(rotation360.z);
+                objectController.RotateObjectSwitch(rotation360.z * 3);
             }
         }
 

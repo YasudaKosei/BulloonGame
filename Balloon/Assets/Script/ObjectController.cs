@@ -19,7 +19,13 @@ public class ObjectController : MonoBehaviour
 
     public CameraShake cameraShake;
 
-    void Update()
+    public SayTextManager sayTextManager;
+
+    public GameObject fallSE;
+
+    private GameObject tmpFallSE;
+
+   void Update()
     {
         if (BalloonManager.isFalling || BalloonManager.wait) return;
 
@@ -100,6 +106,7 @@ public class ObjectController : MonoBehaviour
             Debug.Log("HealPointに当たりました");
             BalloonManager.hp = 3;
             HPSmoke();
+            if (BalloonManager.isFalling) DownBalloonOff();
             Instantiate(buff, buffPos);
         }
     }
@@ -116,7 +123,6 @@ public class ObjectController : MonoBehaviour
     {
         if (BalloonManager.hp == 3)
         {
-            DownBalloonOff();
             for(int i = 0; i < hpSmoke.Length; i++)
             {
                 hpSmoke[i].SetActive(false);
@@ -138,18 +144,22 @@ public class ObjectController : MonoBehaviour
 
     public void DownBalloonOn()
     {
+        tmpFallSE = Instantiate(fallSE);
+        sayTextManager.OnSayText(3, 0);
+        gameObject.layer = LayerMask.NameToLayer("FallingBalloon");
         BalloonManager.isFalling = true;
         smake.SetActive(true);
         fireManager.SetFireScale();
-        gameObject.layer = LayerMask.NameToLayer("FallingBalloon");
     }
 
     public void DownBalloonOff()
     {
+        Destroy(tmpFallSE);
+        sayTextManager.OnSayText(4, 0);
+        gameObject.layer = LayerMask.NameToLayer("Balloon");
         BalloonManager.isFalling = false;
         smake.SetActive(false);
         fireManager.SetFireScale();
         Instantiate(buff, buffPos);
-        gameObject.layer = LayerMask.NameToLayer("Balloon");
     }
 }

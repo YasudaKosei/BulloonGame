@@ -58,10 +58,15 @@ public class HomingMissile : MonoBehaviour
 
             int hp = objectController.HP(damagee);
 
-            if (hp < 1) return;
+            if (hp < 1)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-            // 接触した場所にパーティクルを生成する
-            GameObject spawnParticle = Instantiate(particle, collision.contacts[0].point, Quaternion.identity);
+
+                // 接触した場所にパーティクルを生成する
+                GameObject spawnParticle = Instantiate(particle, collision.contacts[0].point, Quaternion.identity);
 
             Destroy(spawnParticle, 1.0f);
 
