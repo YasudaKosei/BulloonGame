@@ -17,4 +17,21 @@ public class BalloonManager : MonoBehaviour
     public static float rotateSpeed = 200f; // ‰ñ“]‘¬“x
 
     public static int balloonFireLevel = 0;
+
+    private void Start()
+    {
+        isFalling = false;
+
+        wait = true;
+
+        controllerNum = 0;
+
+        hp = 3;
+
+        floatSpeed = 0f; // •‚‚­‘¬“x
+
+        rotateSpeed = 200f; // ‰ñ“]‘¬“x
+
+        balloonFireLevel = 0;
+    }
 }

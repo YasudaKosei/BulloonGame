@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1585776337226284734}
   - component: {fileID: 1075330354069006959}
   - component: {fileID: 6019381410111398710}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CannonColl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 5070260007426293270}
   - component: {fileID: 9140930552356255130}
   - component: {fileID: 3905564222076941033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327760370682333440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

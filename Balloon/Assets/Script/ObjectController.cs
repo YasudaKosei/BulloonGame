@@ -121,6 +121,7 @@ public class ObjectController : MonoBehaviour
 
     public void HPSmoke()
     {
+        Debug.Log(BalloonManager.hp);
         if (BalloonManager.hp == 3)
         {
             for(int i = 0; i < hpSmoke.Length; i++)
@@ -128,23 +129,24 @@ public class ObjectController : MonoBehaviour
                 hpSmoke[i].SetActive(false);
             }
         }
-
-        if (BalloonManager.hp < 3)
+        else if (BalloonManager.hp == 2)
         {
             hpSmoke[0].SetActive(true);
-
-            if (BalloonManager.hp < 2)
-            {
-                hpSmoke[1].SetActive(true);
-            }
         }
-
-        if (BalloonManager.hp == 0) DownBalloonOn();
+        else if(BalloonManager.hp ==1)
+        {
+            hpSmoke[1].SetActive(true);
+        }
+        else
+        {
+            Debug.Log("HPがないので落下します");
+            DownBalloonOn();
+        }
     }
 
     public void DownBalloonOn()
     {
-        tmpFallSE = Instantiate(fallSE);
+        if(tmpFallSE == null) tmpFallSE = Instantiate(fallSE);
         sayTextManager.OnSayText(3, 0);
         gameObject.layer = LayerMask.NameToLayer("FallingBalloon");
         BalloonManager.isFalling = true;

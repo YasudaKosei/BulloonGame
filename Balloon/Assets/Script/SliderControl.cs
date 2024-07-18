@@ -20,6 +20,10 @@ public class SliderControl : MonoBehaviour
 
     private bool onPush = false;
 
+    public GameObject keikolkuSE;
+
+    private GameObject go;
+
     void Start()
     {
         // ‰Šú‚ÌFillAmount‚ğ•Û‘¶
@@ -80,15 +84,28 @@ public class SliderControl : MonoBehaviour
             // FillAmount‚ÉŠî‚Ã‚¢‚ÄF‚ğ•ÏX
             if (currentFillAmount <= 0.2f)
             {
+                if(go == null)
+                {
+                    go = Instantiate(keikolkuSE);
+                    Destroy(go, 1.0f);
+                }
                 image.color = redColor;
             }
             else if (currentFillAmount <= 0.5f)
             {
                 image.color = yellowColor;
+                if (go)
+                {
+                    Destroy(go);
+                }
             }
             else
             {
                 image.color = defaultColor;
+                if (go)
+                {
+                    Destroy(go);
+                }
             }
         }
         else
