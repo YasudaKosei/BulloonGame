@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ObjectRotate : MonoBehaviour
 {
+    public float speed = 60f;
+
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Random.Range(0, 100) * Time.deltaTime, Random.Range(0, 100) * Time.deltaTime, Random.Range(0, 100) * Time.deltaTime, Space.World);
+        transform.Rotate(0f, 0f, speed * Time.deltaTime);
     }
 }
